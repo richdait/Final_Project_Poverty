@@ -1,15 +1,9 @@
 html, body, #map {
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  background: #fff;
   font-family: 'Titillium Web', serif;
-}
-
-.section-hero {
-    min-height: 600px;
-    padding: 0;
 }
 
 #info {
@@ -31,6 +25,7 @@ html, body, #map {
   }
 }
 
+/* social media icons */
 #info a {
   color: lightgray;
 }
@@ -58,7 +53,7 @@ html, body, #map {
 }
 
 #placename {
-  font-size: 25px;
+  font-size: 21px;
   font-family: 'Oswald', sans-serif;
 }
 
@@ -73,20 +68,12 @@ html, body, #map {
 #poverty-percentage {
   margin:0;
   text-align: center;
-  color: red;
-  font-size: 50px;
+  color: orange;
+  font-size: 48px;
 }
 
 #bar-chart {
   top: 20px;
-}
-
-#footer {
-  margin-top: 50px;
-  margin-right: 10px;
-  font-size: 13px;
-  line-height: 150%;
-  color: lightgray;
 }
 
 /* bar chart */
@@ -105,4 +92,12 @@ text {
 .name, .value {
   background-color: black;
   color: black
+}
+
+#footer {
+  margin-top: 50px;
+  margin-right: 10px;
+  font-size: 13px;
+  line-height: 150%;
+  color: lightgray;
 }

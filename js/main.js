@@ -1,3 +1,4 @@
+<!-- mainwindow -->
 <div id= 'map'></div>
 <!-- sidebar -->
 <div id="info">
@@ -5,7 +6,7 @@
 <!-- Social media and dataset links -->
 <span style= "float:right"><span><a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/a-community-reporting-areas-profile-acs-5-year-2013-2017?geometry=-122.858%2C47.534%2C-121.815%2C47.696" target="_blank"><i class="fa fa-globe"></i></a></span>
 <span><a href="https://www.census.gov/newsroom/press-kits/2018/acs-5year.html" target="_blank"><i class="fa fa-info-circle"></i></a></span>
-<span><a href="https://github.com/richdait" target="_blank"><i class="fa fa-github"></i></a></span></span></span>
+<span><a href="https://github.com/richdait/Final_Project_Poverty" target="_blank"><i class="fa fa-github"></i></a></span></span></span>
 
 <p>Cartographer: Richard Dait</br>Course: GEOG 458 AB Advanced Digital Geographies
 </br>Final Project: A Smart Dashboard on Poverty</p>
@@ -14,13 +15,16 @@
 
 <center> <div id="title"> The Geography of Poverty</br>in Seattle, WA </div> </center>
 
-<center> <p id="placename"></p>Seattle</center>
+<center> <p id="placename"></p></center>
 
 <div id="count" class="card">
 
+<div id="#bar-chart" width="400" height="300"></div>
+
+
 <h5 id="desc"> Percentage of the Population with Income Below the</br>200% Federal Poverty Level from 2013 - 2017</h5>
 
-<center><p id="poverty-percentage">11.5</p></center>
+<center><p id="poverty-percentage"></p></center>
 
 </div>
 
@@ -36,8 +40,9 @@
       conditions.
     </br>
     </br>
-      Unfortunately, poverty disproportionately affects certain groups. Additionally, parts of the city appear to have
-      higher levels more than others. The smart dashboard to the right illustrates the geography of poverty in Seattle, WA
+      Unfortunately, poverty disproportionately impacts certain groups more than others. This is
+      evident as some areas of the city have higher concentration levels of poverty.
+      The smart dashboard to the right illustrates the geography of poverty in Seattle, WA
       from 2013 -2017. Data were obtained from a five year series via American Community Survey (ACS) and
       <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/a-community-reporting-areas-profile-acs-5-year-2013-2017?geometry=-122.858%2C47.534%2C-121.815%2C47.696">
       Seattle Open Data Portal</a>. The name of the neighborhood along with percentage of the population with income
@@ -58,10 +63,9 @@ new L.Control.Zoom({position: 'topright'}).addTo(mymap);
 L.control.scale({position: 'bottomleft'}).addTo(mymap);
 
 // Adds a base map.
-lightBasemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-  attribution: 'Cartographer: Richard Dait | GEOG 458 | Basemap by Carto and ArcGIS'});
-satelliteBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
-mymap.addLayer(lightBasemap);
+var lightBasemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+  attribution: 'poverty.geoJSON; ACS and ArcGIS Hub | Font Awesome; Globe, Info and Github Icons | Carto; Basemap | Cartographer By Richard Dait'
+}).addTo(mymap);
 
 // Declares global variables for the poverty layer, bar chart and displayed percentage.
 var povertyLayer = null,
@@ -124,7 +128,7 @@ function onMapClick(e) {
 // Generates the declared dictionary object "tracts".
 // Adds the neighborhood name as a key and the poverty percentage in a dictionary declared before.
 datasets[0].features.forEach(function(d) {
-  tracts[d.properties.GEN_ALIAS] = d.properties.PCT_POP_20;})
+  tracts[d.properties.PCT_POP_20] = d.properties.GEN_ALIAS;})
 
 // This function takes a dictionary, then, returns a dictionary that sorts by poverty percentage.
 function sortJsObject(obj) {items = Object.keys(obj).map(function(key) {
@@ -144,7 +148,7 @@ tracts_sorted = sortJsObject(tracts);
 // Keeps only the top 10 values, and pushes “tracts” to the first of the array.
 x = Object.keys(tracts_sorted).slice(0, 10);
 x.reverse();
-x.push("tract");
+x.push("percentage");
 x.reverse();
 
 // Keeps only the top 10 values, and push “#” to the first of the array.
@@ -155,49 +159,33 @@ y.reverse();
 
 // Generate the chart
 bchart = c3.generate({size: {height: 350, width: 460},
-  data: {x: 'Percentage',
+  data: {x: "percentage",
   columns: [x, y],
-  type: 'bar',
-  onclick: function(d) { }},
-  axis: {x: {type: 'category', tick: {rotate: -60, multiline: false}},
-  y: {tick: {values: [5, 10, 15, 20, 25, 30]},}},
-  legend: {show: false},
-  bindto: "#bar-chart"});});
+  type: "bar",
+  onclick: function(d) {
+    // Updates the map and sidebar once the bar is clicked.
+    var tractName = x[d.x + 1];
 
-// Updates the map and sidebar once the bar is clicked.
-var tractName = x[d.x + 1];
+    // Displays the onclick feature's name to the tag with id 'placename' and 'poverty-percentage'on dashboard.
+    $("#placename").text(tractName + " Neighborhood");
+    $("#poverty-percentage").text(tracts[tractName]);
 
-// Displays the onclick feature's name to the tag with id 'placename' and 'poverty-percentage'on dashboard.
-$("#placename").text(tractName + " Neighborhood");
-$("#poverty-percentage").text(tracts[tractName]);
+    datasets[0].features.forEach(function(t) {
+      if (t.properties.GEN_ALIAS == tractName) {
+        tractbound = L.geoJSON(t);
+        mymap.fitBounds(tractbound.getBounds());
+        mymap.setZoom(12);
+      }
+    });
+  }
+},
 
-datasets[0].features.forEach(function(t) {
-  if (t.properties.GEN_ALIAS == tractName){
-    tractbound = L.geoJSON(t);
-    mymap.fitBounds(tractbound.getBounds());
-    mymap.setZoom(12);}});
-
-// Set function for color ramp
-colors = chroma.scale('OrRd').colors(5);
-
-function setColor(percentage) {
-    var id = 0;
-    if (percentage > 0.85) { id = 4; }
-    else if (percentage > .6 && percentage <= .85) { id = 3; }
-    else if (percentage > .35 && percentage <= .60) { id = 2; }
-    else if (percentage > .1 && percentage <= .35) { id = 1; }
-    else  { id = 0; }
-    return colors[id];
+axis: {x: {type: "category", tick: {rotate: -60, multiline: false}},
+y: {tick: {values: [5, 10, 15, 20, 25, 30]
+},
 }
-
-function style(feature) {
-    return {
-        fillColor: setColor(feature.properties.PCT_POP_20),
-        fillOpacity: 27,
-        weight: 3,
-        opacity: 4,
-        color: 'white',
-        dashArray: '1'
-    };
-}
-L.geoJson.ajax("assets/poverty.geojson", {style: style}).addTo(mymap);
+},
+legend: {show: false},
+bindto: "#bar-chart"
+});
+});
