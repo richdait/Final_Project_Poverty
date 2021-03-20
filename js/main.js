@@ -177,19 +177,6 @@ datasets[0].features.forEach(function(t) {
     mymap.fitBounds(tractbound.getBounds());
     mymap.setZoom(12);}});
 
-// Builds up a set of colors from colorbrewer's oranges category
-var colors = chroma.scale('Oranges').mode('lab').colors(12);
-
-// Dynamically appends style classes to this page. This style classes will be used for colorize the markers.
-for (i = 0; i < 13; i++) {
-    $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
-}
-
-// Dynamically appends style classes to this page. This style classes will be used for colorize the markers.
-for (i = 0; i < 13; i++) {
-    $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
-}
-
 // Set function for color ramp
 colors = chroma.scale('OrRd').colors(5);
 
