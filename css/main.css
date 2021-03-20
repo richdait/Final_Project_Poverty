@@ -3,6 +3,7 @@ html, body, #map {
   width: 100vw;
   margin: 0;
   padding: 0;
+  background: #fff;
   font-family: 'Titillium Web', serif;
 }
 
@@ -69,14 +70,14 @@ html, body, #map {
   font-weight: bold;
 }
 
-#county-count {
+#poverty-percentage {
   margin:0;
   text-align: center;
-  color: orange;
+  color: red;
   font-size: 50px;
 }
 
-#county-chart {
+#bar-chart {
   top: 20px;
 }
 
