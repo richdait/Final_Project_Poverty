@@ -171,7 +171,7 @@ text {
 
 <h5 id="desc"> Percentage of the Population with Income Below the</br>200% Federal Poverty Level from 2013 - 2017</h5>
 
-<center><p id="poverty-percentage">11</p></center>
+<center><p id="poverty-percentage">11.5</p></center>
 
 </div>
 
@@ -191,8 +191,8 @@ text {
       higher levels more than others. The smart dashboard to the right illustrates the geography of poverty in Seattle, WA
       from 2013 -2017. Data were obtained from a five year series via American Community Survey (ACS) and
       <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/a-community-reporting-areas-profile-acs-5-year-2013-2017?geometry=-122.858%2C47.534%2C-121.815%2C47.696">
-      Seattle Open Data Portal</a>. The percentage of the population with income below the 200% federal poverty level
-      from 2013 - 2017 is displayed once you click on a census tract polygon.
+      Seattle Open Data Portal</a>. The name of the neighborhood along with percentage of the population with income
+      below the 200% federal poverty level from 2013 - 2017 is displayed once you click on a census tract polygon.
 
 </div>
 </div>
@@ -228,6 +228,19 @@ Promise.all([$.getJSON("assets/poverty.geojson")]).then(function(datasets) {
   tractsLayer = L.geoJSON(datasets[0], {
      onEachFeature: onEachFeature
   }).addTo(mymap);
+
+  // Builds up a set of colors from colorbrewer's oranges category
+  var colors = chroma.scale('Oranges').mode('lab').colors(12);
+
+  // Dynamically appends style classes to this page. This style classes will be used for colorize the markers.
+  for (i = 0; i < 13; i++) {
+      $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+  }
+
+  // Dynamically appends style classes to this page. This style classes will be used for colorize the markers.
+  for (i = 0; i < 13; i++) {
+      $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+  }
 
 // });
 
