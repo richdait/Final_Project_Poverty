@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- title -->
+  <title> Final Project: Percentage of the Population with Income
+          Below the 200% Federal Poverty Level Smart Dashboard</title>
+
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="css/leaflet.css" />
+  <link href="css/c3.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web|Oswald" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;1,400;1,500&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+
+<style>
+
+html, body, #map {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: 'Titillium Web', serif;
+}
+
+.section-hero {
+    min-height: 600px;
+    padding: 0;
+}
+
+#info {
+  z-index: 1000;
+  position: absolute;
+  width: 500px;
+  top: 1%;
+  bottom: 1%;
+  left: .5%;
+  padding: 40px 15px 900px 15px;
+  background: #343a40;
+  color: white;
+
+}
+
+@media only screen and (max-width: 1026 px) {
+  #info, {
+    visibility: hidden !important;
+  }
+}
+
+#info a {
+  color: lightgray;
+}
+
+#info a:hover {
+  color: white;
+  opacity: 0.3;
+}
+
+#info h4 i {
+  font-size: 1.25e;
+  padding-right: 10px
+}
+
+#title {
+  font-size: 39px;
+  font-family: 'Oswald', sans-serif;
+}
+
+/* social media icons */
+#title span {
+  font-size: 14px;
+  float: right;
+  margin-right: 10px;
+}
+
+#placename {
+  font-size: 25px;
+  font-family: 'Oswald', sans-serif;
+}
+
+/* card decks */
+#desc {
+  text-align: center;
+  color: lightgray;
+  font-size: medium;
+  font-weight: bold;
+}
+
+#county-count {
+  margin:0;
+  text-align: center;
+  color: orange;
+  font-size: 50px;
+}
+
+#county-chart {
+  top: 20px;
+}
+
+#footer {
+  margin-top: 50px;
+  margin-right: 10px;
+  font-size: 13px;
+  line-height: 150%;
+  color: lightgray;
+}
+
+/* bar chart */
+text {
+  fill: gray
+}
+
+.tick line {
+  stroke: gray;
+}
+
+.c3-axis path {
+  stroke: gray;
+}
+
+.name, .value {
+  background-color: black;
+  color: black
+}
+
+</style>
+
+  <!-- javascript libraries -->
+  <script src="js/d3.js"></script>
+  <script src="js/c3.min.js"></script>
+  <script src="js/leaflet.js"></script>
+  <script src="js/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/2.2.1/scrollama.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- mainwindow -->
+<div id= 'map'></div>
+<!-- sidebar -->
+<div id="info">
+
+<span style= "float:right"><span><a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/a-community-reporting-areas-profile-acs-5-year-2013-2017?geometry=-122.858%2C47.534%2C-121.815%2C47.696" target="_blank"><i class="fa fa-globe"></i></a></span>
+<span><a href="https://www.census.gov/newsroom/press-kits/2018/acs-5year.html" target="_blank"><i class="fa fa-info-circle"></i></a></span>
+<span><a href="https://github.com/richdait" target="_blank"><i class="fa fa-github"></i></a></span></span></span>
+
+<p>Cartographer: Richard Dait</br>Course: GEOG 458 AB Advanced Digital Geographies
+</br>Final Project: A Smart Dashboard on Poverty</p>
+</br>
+</br>
+
+<center> <div id="title"> The Geography of Poverty</br>in Seattle, WA </div> </center>
+
+<center> <p id="placename"></p>Seattle</center>
+
+<div id="count" class="card">
+
+<h5 id="desc"> Percentage of the Population with Income Below the</br>200% Federal Poverty Level from 2013 - 2017</h5>
+
+<center><p id="poverty-percentage">11</p></center>
+
+</div>
+
+<div id="county-chart"></div>
+
+<div id="footer">
+      According to a 2016 American Community Survey estimate, Seattle had a population of over seven hundred thousand
+      and a poverty rate of <a href="https://www.seattle.gov/opcd/population-and-demographics/about-seattle#prosperity"><i>11.5%</i></a>.
+      While it was slightly lower than the national average at
+      <a href="https://www.census.gov/library/publications/2017/demo/p60-259.html#:~:text=The%20official%20poverty%20rate%20in,14.8%20percent%20to%2012.7%20percent.12.7%">
+      12.7%</a>, the city and its inhabitants were impacted in various ways. Poverty manifest itself through
+      inadequate education, lack of income, hunger, homelessness, mental illness, poor health and other undesirable
+      conditions.
+    </br>
+    </br>
+      Unfortunately, poverty disproportionately affects certain groups. Additionally, parts of the city appear to have
+      higher levels more than others. The smart dashboard to the right illustrates the geography of poverty in Seattle, WA
+      from 2013 -2017. Data were obtained from a five year series via American Community Survey (ACS) and
+      <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/a-community-reporting-areas-profile-acs-5-year-2013-2017?geometry=-122.858%2C47.534%2C-121.815%2C47.696">
+      Seattle Open Data Portal</a>. The percentage of the population with income below the 200% federal poverty level
+      from 2013 - 2017 is displayed once you click on a census tract polygon.
+
+</div>
+</div>
+
+<script>
+
+var mymap = L.map('map').setView([47.6039614, -122.40037], 11.5);
+
+new L.Control.Zoom({
+position: 'topright'
+}).addTo(mymap);
+
+// Adds a base map.
+// L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+// attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+// ).addTo(mymap);
+
+lightBasemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png');
+satelliteBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+mymap.addLayer(lightBasemap);
+
+// 4. Declare three global variables for the wa counties thematic layer, bar chart, and the organized wa data.
+var tractsLayer = null,
+  bchart = null,
+  tracts = {};
+
+// 5. load all datasets through promise mechnism and store them in an array
+Promise.all([$.getJSON("assets/poverty.geojson")]).then(function(datasets) {
+
+  // 6. Map relevant operations
+
+  // 6.1 create a couties layer
+  tractsLayer = L.geoJSON(datasets[0], {
+     onEachFeature: onEachFeature
+  }).addTo(mymap);
+
+// });
+
+// 6.2 add three events to the the layer “countiesLayer”.
+function onEachFeature(feature, layer) {
+  layer.on({
+    mouseover: highlightFeature,
+    click: clickFeature,
+    mouseout: resetHighlight
+  });
+}
+
+// 6.3 this function works when the mouse hovers over on a map feature.
+function highlightFeature(e) {
+  // e indicates the current event
+  var feature = e.target; //the target capture the object which the event associates with
+  feature.setStyle({
+    weight: 2,
+    opacity: 0.8,
+    color: '#e3e3e3',
+    fillColor: '#00ffd9',
+    fillOpacity: 0.1
+  });
+}
+
+// 6.4 this function executes when the mouse clicks on a map feature.
+function clickFeature(e) {
+  L.DomEvent.stopPropagation(e);
+  $("#placename").text(e.target.feature.properties.GEN_ALIAS + " Neighborhood");
+  $("#poverty-percentage").text(e.target.feature.properties.PCT_POP_20);
+}
+
+// 6.5 reset the hightlighted feature when the mouse is out of its region.
+function resetHighlight(e) {
+  tractsLayer.resetStyle(e.target);
+}
+
+// 6.6 bind the onMapClick function to the mymap object.
+mymap.on('click', onMapClick);
+// when click on any place on the map expect the counties layer, the text on the sidebar will be reset to the total number of WA.
+function onMapClick(e) {
+  $("#placename").text("Washington");
+  $("#percentage-percentage").text("341");
+}
+
+// 7.1 generate the declared dictionary object "counties".
+      // add the county name as key and the number of cell tower as values in a dictionary declared before
+      datasets[0].features.forEach(function(d) {
+        tracts[d.properties.DETL_NAMES] = d.properties.PCT_POP_20;
+      })
+
+      // 7.2 this function take a dictionary, return a dictionary that sorted by the number of cell towers.
+      function sortJsObject(obj) {
+        items = Object.keys(obj).map(function(key) {
+          return [key, obj[key]];
+        });
+        items.sort(function(first, second) {
+          return second[1] - first[1];
+        });
+        sorted_obj = {}
+        $.each(items, function(k, v) {
+          use_key = v[0]
+          use_value = v[1]
+          sorted_obj[use_key] = use_value
+        })
+        return (sorted_obj)
+      }
+      // 7.3 execute the sortJsObject function
+      counties_sorted = sortJsObject(counties);
+
+      // 7.4 slicing the arrays
+      // only keep the top 10 values, and push “county” to the first of the array.
+      x = Object.keys(counties_sorted).slice(0, 10);
+      x.reverse();
+      x.push("county");
+      x.reverse();
+
+      // only keep the top 10 values, and push “#” to the first of the array.
+      y = Object.values(counties_sorted).slice(0, 10);
+      y.reverse();
+      y.push("#");
+      y.reverse();
+
+// 7.5 generate the chart
+      bchart = c3.generate({
+        size: {
+          height: 350,
+          width: 460
+        },
+        data: {
+          x: 'county',
+          columns: [x, y], //input the x - sorted county number, y - the corresponding # of cell towers.
+          type: 'bar', //a bar chart
+          onclick: function(d) { }
+        },
+        axis: {
+          x: { //county
+            type: 'category',
+            tick: {
+              rotate: -60,
+              multiline: false
+            }
+          },
+          y: { //count
+            tick: {
+              values: [5, 10, 15, 20, 25, 30]
+            },
+          }
+        },
+        legend: {
+          show: false
+        },
+        bindto: "#county-chart" //bind the chart to the place holder element "county-chart".
+      });
+
+      // update the map and sidebar once the bar is clicked.
+       var tractName = x[d.x + 1];
+
+       //display the onclick feature's name to the tag with id 'placename' and 'county-count'on dashboard
+       $("#placename").text(tractName + " County");
+       $("#poverty-percentage").text(counties[DETL_NAMES]);
+
+       datasets[0].features.forEach(function(t) {
+         if (t.properties.PCT_POP_20 == tractName){
+           countybound = L.geoJSON(t);
+           mymap.fitBounds(countybound.getBounds());
+           maymap.setZoom(12);
+         }
+       });
+
+});
+
+  </script>
+</body>
+
+</html>
