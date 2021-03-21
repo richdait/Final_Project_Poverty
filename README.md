@@ -32,7 +32,7 @@ high values appear to cluster in the south eastern end, indicating a geography o
 
 <p align="left">
 <h4> III. Applied Libraries and Web Services </h4>
-<h5><p align="left"><ol><li>Leaflet<li>C3<li>D3<li>CSS<li>Javascript<li>Jquery<li>CartoDB<li>Github<li>Font Awesome<li>ArcGIS Hub</ol></h5></p>
+<h5><p align="left"><ol><li>Leaflet - javascript library to build the web map. <li>D3 - assisted with visualizing the json data.<li>CSS - offered styling for better presentation of the code.<li>Javascript - language used to build the code on the html page.<li>Jquery - helped with loading the geoJSON data. <li>CartoDB - supplied the light basemap.<li>Github - serves as the respository hosting service.<li>Font Awesome - provided the three amazing font icons on the dashboard.<li>Atom - text editor used to create the html, write code and upload necessary components to the Github respository.</ol></h5></p>
 
 </h4> <h5>
 <h4> IV. Acknowledgment and Credits</center> </h4> <h5> <p align="left">
