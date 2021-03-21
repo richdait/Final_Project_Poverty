@@ -32,7 +32,7 @@
 
 <div id="footer">
       According to a 2016 American Community Survey estimate, Seattle had a population of over seven hundred thousand
-      and a poverty rate of <a href="https://www.seattle.gov/opcd/population-and-demographics/about-seattle#prosperity"><i>11.5%</i></a>.
+      with a poverty rate of <a href="https://www.seattle.gov/opcd/population-and-demographics/about-seattle#prosperity"><i>11.5%</i></a>.
       While it was slightly lower than the national average at
       <a href="https://www.census.gov/library/publications/2017/demo/p60-259.html#:~:text=The%20official%20poverty%20rate%20in,14.8%20percent%20to%2012.7%20percent.12.7%">
       12.7%</a>, the city and its inhabitants were impacted in various ways. Poverty manifest itself through
@@ -45,8 +45,10 @@
       The smart dashboard to the right illustrates the disparate geography of poverty in Seattle, WA
       from 2013 -2017. Data were obtained from a five year series via American Community Survey (ACS) and
       <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/a-community-reporting-areas-profile-acs-5-year-2013-2017?geometry=-122.858%2C47.534%2C-121.815%2C47.696">
-      Seattle Open Data Portal</a>. The name of the neighborhood along with percentage of the population with income
-      below the 200% federal poverty level from 2013 - 2017 is displayed once you click on a census tract polygon.
+      Seattle Open Data Portal</a>. The name of the neighborhood along with the percentage of the population with income
+      below the 200% federal poverty level from 2013 - 2017 is displayed once a census tract polygon is clicked. When
+      outside of the Seattle featured boundaries is clicked, the smart dashboard displays the default location - Seattle -
+      and its corresponding poverty percentage. A link to the dataset is located above via the globe icon.
 
 </div>
 </div>
