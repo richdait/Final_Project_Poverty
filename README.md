@@ -9,7 +9,7 @@
 
 <h1> <p align="center"> <b> Final Project: A Smart Dashboard Illustrating the Spatial Variation of Poverty in Seattle, WA</b> </p> </br>
 
-<h4> <b> Introduction and Description</b> </h4>
+<h4> I. <strong> Introduction and Description</strong> </h4>
 <p align="left"><h5>
 &nbsp; &nbsp; According to a 2016 American Community Survey estimate, Seattle had a population of over seven hundred thousand
 with a poverty rate of <a href="https://www.seattle.gov/opcd/population-and-demographics/about-seattle#prosperity"><i>11.5%</i></a>.
