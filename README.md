@@ -22,12 +22,12 @@ conditions. Unfortunately, poverty disproportionately impacts certain groups mor
 </br>
 &nbsp;&nbsp; The smart dashboard illustrates the geography of poverty in Seattle, WA
 from 2013 -2017. Data were obtained from a five year series via American Community Survey (ACS) and  <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/a-community-reporting-areas-profile-acs-5-year-2013-2017?geometry=-122.858%2C47.534%2C-121.815%2C47.696"> Seattle Open Data Portal</a>. The name of the neighborhood along with the percentage of the population with income below the 200% federal poverty level from 2013 - 2017 is displayed once a census tract polygon is clicked. When outside of the Seattle featured boundaries is clicked, the smart dashboard displays the default location - Seattle - and its corresponding poverty percentage.
-A link to the dataset is located above via the globe icon.</h5>
+A link to the dataset is located above via the globe icon.
 </br>
 </br>
 &nbsp;&nbsp; Based off the map, the south park neighborhood, located at the southern tip of the Seattle boundary, had the highest percentage of the population with income below the 200% federal poverty level at 61.7%. It was followed closely by the university district at 60.1%. Ironically, the neighborhood located across - Montlake/Portage Bay - reported the lowest percentage at 9.2%. Clicking on the map will show that there is spatial variation. A high concentration of relatively
 high values appear to cluster in the south eastern end, indicating a geography of poverty. Whereas much of the western and north western areas have the lowest numbers.
-</p>
+</h5></p>
 <h4> II. Goals </h4> <h5> <p align="left">&nbsp;&nbsp; There were many goals to this project. The first was to challenge myself and see what my programming and GIS skills were made of. I can confidently say that I did an adirable job, given the time and other obligations. Another goal was to learn as much as possible and practice as I go. Since I have every intention to work in data science or the tech arena, the final project provided me the rigor and practicalities needed to move forward. Last, but most importantly, I wanted to build a web project that illustrated a real-world issue that is relevant and impacts a wide range of individuals. While the smart dashboard only brings to light the geography of poverty in Seattle, WA, this is a good starting point for organizations and politicians to target areas where it is highly concentrated. That
 way, the vulnerable and those suffering would receive adequate care and support.</h5></p>
 
