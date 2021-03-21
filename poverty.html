@@ -205,7 +205,7 @@ var mymap = L.map('map').setView([47.6039614, -122.50037], 11);
 new L.Control.Zoom({position: 'topright'}).addTo(mymap);
 
 // Adds a scale bar to map
-L.control.scale({position: 'bottomleft'}).addTo(mymap);
+L.control.scale({position: 'bottomright'}).addTo(mymap);
 
 // Adds a base map.
 var lightBasemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
