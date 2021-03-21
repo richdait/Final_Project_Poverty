@@ -7,7 +7,7 @@
 
 ![alt text](img/poverty.png)
 
-<h1> <p align="center"> <b> Final Project: The Geography of Poverty in Seattle, WA Smart Dashboard</b> </p> </br>
+<h1> <p align="center"> <b> Final Project: A Smart Dashboard Illustrating the Spatial Variation of Poverty in Seattle, WA</b> </p> </br>
 
 <h4> <b> Introduction and Description</b> </h4>
 <p align="left"> <h5>
@@ -31,4 +31,4 @@ below the 200% federal poverty level from 2013 - 2017 is displayed once you clic
 <h4> <b> Applied Libraries and Web Services</b> </h4>
 <h5><p align="left"><ol><li>Leaflet<li>C3<li>D3<li>CSS<li>Javascript<li>Jquery<li>CartoDB<li>Github<li>Font Awesome<li>ArcGIS Hub</ol></h5></p>
 <h4> <b> Acknowledgment and Credits</center></b> </h4> <h5> <p align="left">
-First and foremost, I would like to thank Professor Bo Zhao and Tyler McCrea for their continuous support and understanding throughout this trying quarter. Both were instrumental in guiding me in the right direction, furthering my knowledge in digital geographies and assisting me with the final project. As for the smart dashboard, the basemap is from CartoDB. The project html and its various components, are host via <a href="https://github.com/richdait/Final_Project_Poverty">Github</a>. The globe, info and github icons are courtesy of <a href="https://fontawesome.com/">Font Awesome</a>. Lastly, credit goes out to <a href="https://leafletjs.com/">Leaflet</a> for giving me a platform to build amazing web applications such as this smart dashboard depicting poverty in Seattle, WA.
+First and foremost, I would like to thank Professor Bo Zhao and Tyler McCrea for their continuous support and understanding throughout this trying quarter. Both were instrumental in guiding me in the right direction, furthering my knowledge in digital geographies and assisting me with the final project. As for the smart dashboard, the basemap is from CartoDB. The project html and its various components, are host via <a href="https://github.com/richdait/Final_Project_Poverty">Github</a>. The globe, info and github icons are courtesy of <a href="https://fontawesome.com/">Font Awesome</a>. Lastly, credit goes out to <a href="https://leafletjs.com/">Leaflet</a> for giving me a platform to build amazing web applications such as this smart dashboard illustrating the spatial variation of poverty in Seattle, WA.

@@ -13,7 +13,7 @@
 </br>
 </br>
 
-<center> <div id="title"> The Geography of Poverty</br>in Seattle, WA </div> </center>
+<center> <div id="title"> The Spatial Variation of Poverty</br>in Seattle, WA </div> </center>
 
 <center> <p id="placename"></p></center>
 
@@ -42,7 +42,7 @@
     </br>
       Unfortunately, poverty disproportionately impacts certain groups more than others. This is
       evident as some areas of the city have higher concentration levels of poverty.
-      The smart dashboard to the right illustrates the geography of poverty in Seattle, WA
+      The smart dashboard to the right illustrates the disparate geography of poverty in Seattle, WA
       from 2013 -2017. Data were obtained from a five year series via American Community Survey (ACS) and
       <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/a-community-reporting-areas-profile-acs-5-year-2013-2017?geometry=-122.858%2C47.534%2C-121.815%2C47.696">
       Seattle Open Data Portal</a>. The name of the neighborhood along with percentage of the population with income
